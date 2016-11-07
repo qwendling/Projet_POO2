@@ -3,6 +3,8 @@ window.onload = function()
     //-------- creation d'un élément image --------
     var img = new Image();
     img.crossorigin="anonymous";
+    img.className="col-md-6";
+    img.style.verticalAlign="initial";
     img.src = "Son.jpg";
     img.id="img"
     document.getElementById("main").appendChild(img);
@@ -16,7 +18,8 @@ window.onload = function()
       var canv = document.createElement("canvas");
       canv.width = largeur;
       canv.height = hauteur;
-      document.body.appendChild(canv);
+      document.getElementById("main").appendChild(canv);
+      canv.className="col-md-6";
 
       //-------- récupération du contexte  --------
       var ctxt = canv.getContext('2d');
