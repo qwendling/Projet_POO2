@@ -159,18 +159,14 @@ var MonImage=function(largeur,hauteur){
 		var couleurSomme = new Couleur();
 		for(j=0;j<3;j++){
 			for(k=0;k<3;k++){
-				if(x+(k-1)<0)
-					couleurSomme.ajouteCouleurPonderee(new Couleur(),1);
-				else if(y+(j-1)<0)
-					couleurSomme.ajouteCouleurPonderee(new Couleur(),1);
-				else if(x+(k-1)>=this.largeur)
-					couleurSomme.ajouteCouleurPonderee(new Couleur(),1);
-				else if(y+(j-1)>=this.hauteur)
-					couleurSomme.ajouteCouleurPonderee(new Couleur(),1);
-				else{
+				if(!(x+(k-1)<0 || y+(j-1)<0 || x+(k-1)>=this.largeur || y+(j-1)>=this.hauteur)){
 					c=new Couleur(this.tab2D[y+(j-1)][x+(k-1)].r,this.tab2D[y+(j-1)][x+(k-1)].g,this.tab2D[y+(j-1)][x+(k-1)].b,this.tab2D[y+(j-1)][x+(k-1)].opac);
-					c.coef(noyau[j][k]);
-					couleurSomme.ajouteCouleurPonderee(c,1);
+					c.r*=(noyau[j][k]);
+					c.g*=(noyau[j][k]);
+					c.b*=(noyau[j][k]);
+					couleurSomme.r+=c.r;
+					couleurSomme.g+=c.g;
+					couleurSomme.b+=c.b;
 				}
 			}
 		}
@@ -188,6 +184,39 @@ var MonImage=function(largeur,hauteur){
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
 				this.tab2D[j][k]=cp.tab2D[j][k];
+			}
+		}
+	}
+
+	this.add=function(img2){
+		var j,k;
+		for(j=0;j<this.hauteur;j++){
+			for(k=0;k<this.largeur;k++){
+				this.tab2D[j][k].r+=img2.tab2D[j][k].r;
+				this.tab2D[j][k].g+=img2.tab2D[j][k].g;
+				this.tab2D[j][k].b+=img2.tab2D[j][k].b;
+			}
+		}
+	}
+
+	this.mult=function(img2){
+		var j,k;
+		for(j=0;j<this.hauteur;j++){
+			for(k=0;k<this.largeur;k++){
+				this.tab2D[j][k].r*=img2.tab2D[j][k].r;
+				this.tab2D[j][k].g*=img2.tab2D[j][k].g;
+				this.tab2D[j][k].b*=img2.tab2D[j][k].b;
+			}
+		}
+	}
+
+	this.sqrtall=function(){
+		var j,k;
+		for(j=0;j<this.hauteur;j++){
+			for(k=0;k<this.largeur;k++){
+				this.tab2D[j][k].r=Math.sqrt(this.tab2D[j][k].r);
+				this.tab2D[j][k].g=Math.sqrt(this.tab2D[j][k].g);
+				this.tab2D[j][k].b=Math.sqrt(this.tab2D[j][k].b);
 			}
 		}
 	}
