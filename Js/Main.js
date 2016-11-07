@@ -28,7 +28,9 @@ window.onload = function()
       //--------------------------------------------------
       //------------- Traitement de imgData --------------
       //--------------------------------------------------
-
+      var m_img=MonImage(largeur,hauteur);
+      m_img.fromImageData(imgData);
+      m_img.
 
 
       //---- afficher la tailles ----
