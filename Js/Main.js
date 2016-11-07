@@ -30,18 +30,9 @@ window.onload = function()
       //--------------------------------------------------
       var m_img=new MonImage(largeur,hauteur);
       m_img.fromImageData(imgData.data);
-      m_img.niveauGris();
-      var noyau1=tab3x3(1,0,-1,2,0,-2,1,0,-1);
-      var noyau2=tab3x3(1,2,1,0,0,0,-1,-2,-1);
-      var gx=m_img.copie();
-      var gy=m_img.copie();
-      gx.convolution(noyau1);
-      gy.convolution(noyau2);
-      gx.mult(gx);
-      gy.mult(gy);
-      gx.add(gy);
-      gx.sqrtall();
-      gx.toImgData(imgData.data);
+      m_img.sobel();
+
+      m_img.toImgData(imgData.data);
       //---- afficher la tailles ----
       console.log(imgData.width + " x " + imgData.height);
 

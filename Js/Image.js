@@ -221,4 +221,23 @@ var MonImage=function(largeur,hauteur){
 		}
 	}
 
+	this.sobel=function(){
+		this.niveauGris();
+		var noyau1=tab3x3(1,0,-1,2,0,-2,1,0,-1);
+		var noyau2=tab3x3(1,2,1,0,0,0,-1,-2,-1);
+		var gx=this.copie();
+		var gy=this.copie();
+		gx.convolution(noyau1);
+		gy.convolution(noyau2);
+		gx.mult(gx);
+		gy.mult(gy);
+		gx.add(gy);
+		gx.sqrtall();
+		for(j=0;j<this.hauteur;j++){
+			for(k=0;k<this.largeur;k++){
+				this.tab2D[j][k]=gx.tab2D[j][k];
+			}
+		}
+	}
+
 }
