@@ -1,3 +1,6 @@
+var m_img;
+var ctxt;
+var SeuilImg=100;
 window.onload = function()
 {
     //-------- creation d'un élément image --------
@@ -22,7 +25,7 @@ window.onload = function()
       canv.className="col-md-6";
 
       //-------- récupération du contexte  --------
-      var ctxt = canv.getContext('2d');
+      ctxt = canv.getContext('2d');
 
       //------- chargement de l'image de départ dans le canvas -----
       ctxt.drawImage(img, 0, 0);
@@ -31,11 +34,14 @@ window.onload = function()
       //--------------------------------------------------
       //------------- Traitement de imgData --------------
       //--------------------------------------------------
-      var m_img=new MonImage(largeur,hauteur);
+      m_img=new MonImage(largeur,hauteur);
       m_img.fromImageData(imgData.data);
       m_img.sobel();
+      var tmpImg=m_img.copie();
+      tmpImg.seuil(SeuilImg);
+      m_img.print("r");
 
-      m_img.toImgData(imgData.data);
+      tmpImg.toImgData(imgData.data);
       //---- afficher la tailles ----
       console.log(imgData.width + " x " + imgData.height);
 
@@ -54,7 +60,19 @@ window.onload = function()
       // visualiser imgData modifié
 
       ctxt.putImageData(imgData,0,0);
-    },1000)
-
-
+      document.getElementById("ValueSeuil").innerHTML += SeuilImg;
+    },1000);
+    document.getElementById("PlusSeuil").onclick=(function(){
+      SeuilImg++;
+      document.getElementById("ValueSeuil").innerHTML = "Seuil : "+SeuilImg;
+      var tmpImg=m_img.copie();
+      tmpImg.seuil(SeuilImg);
+      var imgData = ctxt.getImageData(0,0,tmpImg.largeur,tmpImg.hauteur);
+      tmpImg.toImgData(imgData.data);
+      ctxt.putImageData(imgData,0,0);
+          });
+    document.getElementById("MinusSeuil").onclick=(function(){
+      SeuilImg--;
+      document.getElementById("ValueSeuil").innerHTML = "Seuil : "+SeuilImg;
+    });
 }

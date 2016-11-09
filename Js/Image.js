@@ -235,7 +235,10 @@ var MonImage=function(largeur,hauteur){
 		gx.sqrtall();
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
-				this.tab2D[j][k]=gx.tab2D[j][k];
+				if(gx.tab2D[j][k].r>255.)
+					this.tab2D[j][k]=new Couleur(255,255,255,255);
+				else
+					this.tab2D[j][k]=gx.tab2D[j][k];
 			}
 		}
 	}
