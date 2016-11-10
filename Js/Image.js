@@ -115,7 +115,7 @@ var MonImage=function(largeur,hauteur){
 		var j,k;
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
-				nouv.tab2D[j][k]=this.tab2D[j][k];
+				nouv.tab2D[j][k]=this.tab2D[j][k].copie();
 			}
 		}
 		return nouv;

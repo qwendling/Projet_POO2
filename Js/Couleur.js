@@ -8,6 +8,10 @@ var Couleur=function(r=0,g=0,b=0,opac=255){
 		var buffer="("+this.r+","+this.g+","+this.b+","+this.opac+")";
 		return buffer;
 	}
+	
+	this.copie=function(){
+		return new Couleur(this.r,this.g,this.b,this.opac);
+	}
 
 	this.coef=function(k){
 		if(k*this.r>255)

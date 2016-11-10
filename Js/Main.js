@@ -3,6 +3,7 @@ var ctxt;
 var SeuilImg=100;
 window.onload = function()
 {
+	document.getElementById("SliderSeuil").value=SeuilImg;
     //-------- creation d'un élément image --------
     var img = new Image();
     img.crossorigin="anonymous";
@@ -74,5 +75,19 @@ window.onload = function()
     document.getElementById("MinusSeuil").onclick=(function(){
       SeuilImg--;
       document.getElementById("ValueSeuil").innerHTML = "Seuil : "+SeuilImg;
+      var tmpImg=m_img.copie();
+      tmpImg.seuil(SeuilImg);
+      var imgData = ctxt.getImageData(0,0,tmpImg.largeur,tmpImg.hauteur);
+      tmpImg.toImgData(imgData.data);
+      ctxt.putImageData(imgData,0,0);
+    });
+    document.getElementById("SliderSeuil").onmouseup=(function(){
+		SeuilImg=this.value;
+		document.getElementById("ValueSeuil").innerHTML = "Seuil : "+SeuilImg;
+		var tmpImg=m_img.copie();
+		tmpImg.seuil(SeuilImg);
+		var imgData = ctxt.getImageData(0,0,tmpImg.largeur,tmpImg.hauteur);
+		tmpImg.toImgData(imgData.data);
+		ctxt.putImageData(imgData,0,0);
     });
 }
