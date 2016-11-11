@@ -220,6 +220,23 @@ var MonImage=function(largeur,hauteur){
 			}
 		}
 	}
+    
+    this.ToNiveauGris=function(){
+        var newNivGris = new NiveauGris(this.largeur, this.hauteur);
+        var i; var j;
+        for(i=0;i<this.hauteur;i++){
+            for(j=0;j<this.largeur;j++){
+                newNivGris.set(i,j,this.tab2D[i][j].intensite());
+            }
+        }
+        return newNivGris;
+    }
+    
+    this.deriche = function(alpha){
+        var tmp = this.ToNiveauGris();
+        tmp.deriche(alpha);
+        this.tab2D = (tmp.toImage()).tab2D;
+    }
 
 	this.sobel=function(){
 		this.niveauGris();

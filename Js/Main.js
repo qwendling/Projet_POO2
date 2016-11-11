@@ -9,7 +9,7 @@ window.onload = function()
     img.crossorigin="anonymous";
     img.className="col-md-6";
     img.style.verticalAlign="initial";
-    img.src = "Son.jpg";
+    img.src = "240px-Grapevine_leaf.jpg";
     img.id="img"
     document.getElementById("main").appendChild(img);
     img=document.getElementById("img");
@@ -37,7 +37,7 @@ window.onload = function()
       //--------------------------------------------------
       m_img=new MonImage(largeur,hauteur);
       m_img.fromImageData(imgData.data);
-      m_img.sobel();
+      m_img.deriche(1);
       var tmpImg=m_img.copie();
       tmpImg.seuil(SeuilImg);
       m_img.print("r");
