@@ -220,31 +220,26 @@ var MonImage=function(largeur,hauteur){
 			}
 		}
 	}
-    
+
     this.ToNiveauGris=function(){
-        var newNivGris = new NiveauGris(this.largeur, this.hauteur);
+        var newNivGris = new Image_NvGris(this.largeur, this.hauteur);
         var i; var j;
         for(i=0;i<this.hauteur;i++){
             for(j=0;j<this.largeur;j++){
-                newNivGris.set(i,j,this.tab2D[i][j].intensite());
+                newNivGris.tab2D[i][j]=parseInt(this.tab2D[i][j].intensite());
             }
         }
         return newNivGris;
     }
-    
-    this.deriche = function(alpha){
-        var tmp = this.ToNiveauGris();
-        tmp.deriche(alpha);
-        this.tab2D = (tmp.toImage()).tab2D;
-    }
 
 	this.sobel=function(){
-		this.niveauGris();
 		var noyau1=tab3x3(1,0,-1,2,0,-2,1,0,-1);
 		var noyau2=tab3x3(1,2,1,0,0,0,-1,-2,-1);
-		var gx=this.copie();
-		var gy=this.copie();
+		var gx=this.ToNiveauGris();
+		gx.print();
+		var gy=this.ToNiveauGris();
 		gx.convolution(noyau1);
+		gx.print();
 		gy.convolution(noyau2);
 		gx.mult(gx);
 		gy.mult(gy);
@@ -252,10 +247,10 @@ var MonImage=function(largeur,hauteur){
 		gx.sqrtall();
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
-				if(gx.tab2D[j][k].r>255.)
+				if(gx.tab2D[j][k]>255.)
 					this.tab2D[j][k]=new Couleur(255,255,255,255);
 				else
-					this.tab2D[j][k]=gx.tab2D[j][k];
+					this.tab2D[j][k]=new Couleur(gx.tab2D[j][k],gx.tab2D[j][k],gx.tab2D[j][k]);
 			}
 		}
 	}
