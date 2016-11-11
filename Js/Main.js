@@ -37,7 +37,7 @@ window.onload = function()
       //--------------------------------------------------
       m_img=new MonImage(largeur,hauteur);
       m_img.fromImageData(imgData.data);
-      m_img.deriche(1);
+      m_img.sobel();
       var tmpImg=m_img.copie();
       tmpImg.seuil(SeuilImg);
       m_img.print("r");
