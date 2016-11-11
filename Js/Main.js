@@ -9,7 +9,7 @@ window.onload = function()
     img.crossorigin="anonymous";
     img.className="col-md-6";
     img.style.verticalAlign="initial";
-    img.src = "240px-Grapevine_leaf.jpg";
+    img.src = "Son.jpg";
     img.id="img"
     document.getElementById("main").appendChild(img);
     img=document.getElementById("img");
