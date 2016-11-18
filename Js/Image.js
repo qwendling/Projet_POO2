@@ -236,10 +236,8 @@ var MonImage=function(largeur,hauteur){
 		var noyau1=tab3x3(1,0,-1,2,0,-2,1,0,-1);
 		var noyau2=tab3x3(1,2,1,0,0,0,-1,-2,-1);
 		var gx=this.ToNiveauGris();
-		gx.print();
 		var gy=this.ToNiveauGris();
 		gx.convolution(noyau1);
-		gx.print();
 		gy.convolution(noyau2);
 		gx.mult(gx);
 		gy.mult(gy);
