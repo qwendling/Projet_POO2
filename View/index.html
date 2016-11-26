@@ -15,6 +15,9 @@
     <script src="../Js/Couleur.js"></script>
     <script src="../Js/Image.js"></script>
     <script src="../Js/Image_NvGris.js"></script>
+    <script src="../Js/Point.js"></script>
+    <script src="../Js/VectorD.js"></script>
+    <script src="../Js/VectImg.js"></script>
     <link rel="stylesheet" type="text/css" href="./style.css">
   </head>
   <body>
@@ -25,33 +28,41 @@
         </div>
       </div>
       <div class="row">
-		  <div class="col-md-3" id="Option">
-        <div class="row">
-          <input type="file" id="inputfile">
-        </div>
-        <div class="row">
-          <button id="commitImg">Go !</button>
-        </div>
-        <div class="row">
-          <button id="Filter">Sobel</button>
-        </div>
-			  <div class="row">
-				  <div class="col-md-4">
-					<span class="glyphicon glyphicon-plus" id="PlusSeuil"></span>
-				  </div>
-				  <div class="col-md-6">
-					<p id="ValueSeuil">Seuil : </p>
-				  </div>
-				  <div class="col-md-1">
-					<span class="glyphicon glyphicon-minus" id="MinusSeuil"></span>
-				  </div>
-			</div>
-				<div class="row">
-						<input id="SliderSeuil" type="range" max="255" min="0" step="1"/>
-				</div>
-		  </div>
-		  <div class="col-md-9" id="main">
-		  </div>
+  		  <div class="col-md-3" id="Option">
+          <div class="row">
+            <input type="file" id="inputfile">
+          </div>
+          <div class="row">
+            <button id="commitImg">Go !</button>
+          </div>
+          <div class="row">
+            <button id="Filter">Sobel</button>
+          </div>
+          <div class="row">
+            <button id="InputVect">Vectorisation</button>
+          </div>
+  			  <div class="row">
+  				  <div class="col-md-4">
+  					<span class="glyphicon glyphicon-plus" id="PlusSeuil"></span>
+  				  </div>
+  				  <div class="col-md-6">
+  					<p id="ValueSeuil">Seuil : </p>
+  				  </div>
+  				  <div class="col-md-1">
+  					<span class="glyphicon glyphicon-minus" id="MinusSeuil"></span>
+  				  </div>
+  			</div>
+  				<div class="row">
+  						<input id="SliderSeuil" type="range" max="255" min="0" step="1"/>
+  				</div>
+  		  </div>
+  		  <div class="col-md-9">
+          <div class="row" id="main">
+          </div>
+          <div class="row">
+            <canvas id="Vect"></canvas>
+          </div>
+  		  </div>
       </div>
     </div>
   </body>

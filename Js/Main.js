@@ -45,6 +45,21 @@ window.onload = function()
 	document.getElementById("commitImg").onclick=(function(){
 		document.getElementById("img").src=document.getElementById("inputfile").value;
 	});
+
+	document.getElementById("InputVect").onclick=(function(){
+		var tmpImg=m_img.ToNiveauGris();
+		var Vecto=new VectImg();
+		Vecto.ToVect(tmpImg);
+		var canvasVect=document.getElementById("Vect");
+		var img=document.getElementById("img");
+		var largeur = img.naturalWidth;  // On récupère la largeur
+	  var hauteur = img.naturalHeight; // et la hauteur de l'image
+		canvasVect.width=largeur;
+		canvasVect.height=hauteur;
+		var context=canvasVect.getContext('2d');
+		Vecto.draw(context);
+	});
+
 	document.getElementById("Filter").onclick=(function(){
 		var img=document.getElementById("img");
 		var canv=document.getElementById("canvS");

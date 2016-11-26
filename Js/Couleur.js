@@ -50,16 +50,16 @@ var Couleur=function(r=0,g=0,b=0,opac=255){
 
 	this.seuil=function(s){
 		var i=this.intensite();
-		if(i<s){
+		if(i<=s){
 			this.r=0;
 			this.g=0;
 			this.b=0;
 		}
-		// else{
-		// 	this.r=255;
-		// 	this.g=255;
-		// 	this.b=255;
-		// }
+		else{
+			this.r=255;
+			this.g=255;
+			this.b=255;
+		}
 	}
 
 	this.negate=function(){
