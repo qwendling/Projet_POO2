@@ -47,7 +47,9 @@ window.onload = function()
 	});
 
 	document.getElementById("InputVect").onclick=(function(){
-		var tmpImg=m_img.ToNiveauGris();
+		var tmpImg=m_img.copie();
+		tmpImg.seuil(SeuilImg);
+		tmpImg=tmpImg.ToNiveauGris();
 		var Vecto=new VectImg();
 		Vecto.ToVect(tmpImg);
 		var canvasVect=document.getElementById("Vect");
