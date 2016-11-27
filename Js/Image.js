@@ -16,18 +16,13 @@ function tab3x3(a=0,b=0,c=0,d=0,e=0,f=0,g=0,h=0,i=0){
 }
 
 var MonImage=function(largeur,hauteur){
-	this.largeur=largeur;
-	this.hauteur=hauteur;
-	this.tab2D=new Array(hauteur);
-	var i;
-	for(i=0;i<hauteur;i++)
-		this.tab2D[i]=new Array(largeur);
+	Matrix.call(this,largeur,hauteur);
 
 	this.fromImageData=function(data){
 		var j,k;
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
-				this.tab2D[j][k]=new Couleur(data[j*4*this.largeur+k*4],data[j*4*this.largeur+k*4+1],data[j*4*this.largeur+k*4+2],data[j*4*this.largeur+k*4+3]);
+				this.set(k,j,new Couleur(data[j*4*this.largeur+k*4],data[j*4*this.largeur+k*4+1],data[j*4*this.largeur+k*4+2],data[j*4*this.largeur+k*4+3]));
 			}
 		}
 	}
@@ -36,7 +31,7 @@ var MonImage=function(largeur,hauteur){
 		var c,j,k;
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
-				c=this.tab2D[j][k];
+				c=this.get(k,j);
 				data[j*4*this.largeur+k*4]=c.r;
 				data[j*4*this.largeur+k*4+1]=c.g;
 				data[j*4*this.largeur+k*4+2]=c.b;
@@ -44,22 +39,13 @@ var MonImage=function(largeur,hauteur){
 			}
 		}
 	}
-
-	this.get=function(x,y){
-		return this.tab2D[x][y];
-	}
-
-	this.set=function(x,y,couleur){
-		this.tab2D[x][y]=couleur;
-	}
-
 	this.print=function(comp){
 		var buffer="";
 		var j,k;
 		for(j=0;j<this.hauteur;j++){
 			buffer=buffer+j+"(";
 			for(k=0;k<this.largeur;k++){
-				buffer=buffer+" "+this.tab2D[j][k][comp];
+				buffer=buffer+" "+this.get(k,j)[comp];
 			}
 			buffer=buffer+")\n";
 		}
@@ -69,7 +55,7 @@ var MonImage=function(largeur,hauteur){
 		var j,k;
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
-				this.tab2D[j][k].negate();
+				this.get(k,j).negate();
 			}
 		}
 	}
@@ -78,7 +64,7 @@ var MonImage=function(largeur,hauteur){
 		var j,k;
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
-				this.tab2D[j][k].coef(co);
+				this.get(k,j).coef(co);
 			}
 		}
 	}
@@ -87,7 +73,7 @@ var MonImage=function(largeur,hauteur){
 		var j,k;
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
-				this.tab2D[j][k].niveauGris();
+				this.get(k,j).niveauGris();
 			}
 		}
 	}
@@ -96,7 +82,7 @@ var MonImage=function(largeur,hauteur){
 		var j,k;
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
-				this.tab2D[j][k].seuil(s);
+				this.get(k,j).seuil(s);
 			}
 		}
 	}
@@ -105,7 +91,7 @@ var MonImage=function(largeur,hauteur){
 		var j,k;
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
-				this.tab2D[j][k].permuteComposante(comp1,comp2);
+				this.get(k,j).permuteComposante(comp1,comp2);
 			}
 		}
 	}
@@ -115,7 +101,7 @@ var MonImage=function(largeur,hauteur){
 		var j,k;
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
-				nouv.tab2D[j][k]=this.tab2D[j][k].copie();
+				nouv.set(k,j,this.get(k,j).copie());
 			}
 		}
 		return nouv;
@@ -125,7 +111,7 @@ var MonImage=function(largeur,hauteur){
 		var j,k;
 		for(j=0;j<this.hauteur;j+=2){
 			for(k=0;k<this.largeur;k++){
-				this.tab2D[j][k].opac=0;
+				this.get(k,j).opac=0;
 			}
 		}
 	}
@@ -134,24 +120,10 @@ var MonImage=function(largeur,hauteur){
 		var j,k;
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
-				if(this.tab2D[j][k].memeCouleur(couleurFond))
-					this.tab2D[j][k].opac=0;
+				if(this.get(k,j).memeCouleur(couleurFond))
+					this.get(k,j).opac=0;
 			}
 		}
-	}
-
-	this.convPixelPourCommencer=function(noyau){
-		var j,k;
-		var couleurSomme = new Couleur();
-		var c;
-		for(j=0;j<3;j++){
-			for(k=0;k<3;k++){
-				c=new Couleur(this.tab2D[y+(j-1)][x+(k-1)].r,this.tab2D[y+(j-1)][x+(k-1)].g,this.tab2D[y+(j-1)][x+(k-1)].b,this.tab2D[y+(j-1)][x+(k-1)].opac);
-				c.coef(noyau[j][k]);
-				couleurSomme.ajouteCouleurPonderee(c,1);
-			}
-		}
-		return couleurSomme;
 	}
 
 	this.convPixel=function(noyau,x,y){
@@ -160,7 +132,8 @@ var MonImage=function(largeur,hauteur){
 		for(j=0;j<3;j++){
 			for(k=0;k<3;k++){
 				if(!(x+(k-1)<0 || y+(j-1)<0 || x+(k-1)>=this.largeur || y+(j-1)>=this.hauteur)){
-					c=new Couleur(this.tab2D[y+(j-1)][x+(k-1)].r,this.tab2D[y+(j-1)][x+(k-1)].g,this.tab2D[y+(j-1)][x+(k-1)].b,this.tab2D[y+(j-1)][x+(k-1)].opac);
+					this.get(x+k-1,y+j-1)
+					c=new Couleur(this.get(x+k-1,y+j-1).r,this.get(x+k-1,y+j-1).g,this.get(x+k-1,y+j-1).b,this.get(x+k-1,y+j-1).opac);
 					c.r*=(noyau[j][k]);
 					c.g*=(noyau[j][k]);
 					c.b*=(noyau[j][k]);
@@ -178,12 +151,12 @@ var MonImage=function(largeur,hauteur){
 		var cp=this.copie();
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
-				cp.tab2D[j][k]=this.convPixel(noyau,k,j);
+				cp.set(k,j,this.convPixel(noyau,k,j));
 			}
 		}
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
-				this.tab2D[j][k]=cp.tab2D[j][k];
+				this.set(k,j,cp.get(k,j));
 			}
 		}
 	}
@@ -192,9 +165,9 @@ var MonImage=function(largeur,hauteur){
 		var j,k;
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
-				this.tab2D[j][k].r+=img2.tab2D[j][k].r;
-				this.tab2D[j][k].g+=img2.tab2D[j][k].g;
-				this.tab2D[j][k].b+=img2.tab2D[j][k].b;
+				this.get(k,j).r+=img2.get(k,j).r;
+				this.get(k,j).g+=img2.get(k,j).g;
+				this.get(k,j).b+=img2.get(k,j).b;
 			}
 		}
 	}
@@ -203,9 +176,9 @@ var MonImage=function(largeur,hauteur){
 		var j,k;
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
-				this.tab2D[j][k].r*=img2.tab2D[j][k].r;
-				this.tab2D[j][k].g*=img2.tab2D[j][k].g;
-				this.tab2D[j][k].b*=img2.tab2D[j][k].b;
+				this.get(k,j).r*=img2.get(k,j).r;
+				this.get(k,j).g*=img2.get(k,j).g;
+				this.get(k,j).b*=img2.get(k,j).b;
 			}
 		}
 	}
@@ -214,9 +187,9 @@ var MonImage=function(largeur,hauteur){
 		var j,k;
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
-				this.tab2D[j][k].r=Math.sqrt(this.tab2D[j][k].r);
-				this.tab2D[j][k].g=Math.sqrt(this.tab2D[j][k].g);
-				this.tab2D[j][k].b=Math.sqrt(this.tab2D[j][k].b);
+				this.get(k,j).r=Math.sqrt(this.get(k,j).r);
+				this.get(k,j).g=Math.sqrt(this.get(k,j).g);
+				this.get(k,j).b=Math.sqrt(this.get(k,j).b);
 			}
 		}
 	}
@@ -226,7 +199,7 @@ var MonImage=function(largeur,hauteur){
         var i; var j;
         for(i=0;i<this.hauteur;i++){
             for(j=0;j<this.largeur;j++){
-                newNivGris.tab2D[i][j]=parseInt(this.tab2D[i][j].intensite());
+								newNivGris.set(j,i,parseInt(this.get(j,i).intensite()));
             }
         }
         return newNivGris;
@@ -246,9 +219,9 @@ var MonImage=function(largeur,hauteur){
 		for(j=0;j<this.hauteur;j++){
 			for(k=0;k<this.largeur;k++){
 				if(gx.tab2D[j][k]>255.)
-					this.tab2D[j][k]=new Couleur(255,255,255,255);
+					this.set(k,j,new Couleur(255,255,255,255));
 				else
-					this.tab2D[j][k]=new Couleur(gx.tab2D[j][k],gx.tab2D[j][k],gx.tab2D[j][k]);
+					this.set(k,j,new Couleur(gx.get(k,j),gx.get(k,j),gx.get(k,j)));
 			}
 		}
 	}

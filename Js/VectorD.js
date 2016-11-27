@@ -17,22 +17,18 @@ var VectorD=function(){
     img.tab2D[p.y][p.x];
     if(p.x+1 < img.largeur && img.tab2D[p.y][p.x+1]==255){
       this.continueVect(img,1,0);
-      console.log("cool");
       return;
     }
     if(p.x+1 < img.largeur && p.y+1 < img.hauteur && img.tab2D[p.y+1][p.x+1]==255){
       this.continueVect(img,1,1);
-      console.log("cool");
       return;
     }
     if(p.y+1 < img.hauteur && img.tab2D[p.y+1][p.x]==255){
       this.continueVect(img,0,1);
-      console.log("cool");
       return;
     }
     if(p.x-1 >= 0 && p.y+1 < img.hauteur &&img.tab2D[p.y+1][p.x-1]==255){
       this.continueVect(img,-1,1);
-      console.log("cool");
     }
   }
   this.continueVect=function(img,dx,dy){
