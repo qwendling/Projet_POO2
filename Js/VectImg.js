@@ -7,7 +7,9 @@ var VectImg=function(){
         if(img.tab2D[i][j]==255){
           //Debut d'un vecteur
           var v=new VectorD();
-          v.beginVect(new Point(j,i),img);
+          v.add(new Point(j,i));
+          img.set(j,i,0);
+          v.continueVect(new Point(j,i),img);
           this.TabVect.push(v);
         }
       }
