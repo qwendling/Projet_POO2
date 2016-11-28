@@ -18,74 +18,39 @@ var VectorD=function(){
   this.fin=function(){
     return this.TabPoint[this.TabPoint.length - 1];
   }
-  this.beginVect=function(p,img){
-    this.add(p);
+  this.continueVect=function(p,img,prec){
     if(p.x+1 < img.largeur && img.tab2D[p.y][p.x+1]==255){
       this.add(new Point(p.x+1,p.y));
-      if(this.estDiscret(2)){
-        this.continueVect(new Point(p.x+1,p.y),img);
-        return;
-      }
-      this.del();
-    }
-    if(p.x+1 < img.largeur && p.y+1 < img.hauteur && img.tab2D[p.y+1][p.x+1]==255){
-      this.add(new Point(p.x+1,p.y+1));
-      if(this.estDiscret(2)){
-        this.continueVect(new Point(p.x+1,p.y+1),img);
-        return;
-      }
-      this.del();
-    }
-    if(p.y+1 < img.hauteur && img.tab2D[p.y+1][p.x]==255){
-      this.add(new Point(p.x,p.y+1));
-      if(this.estDiscret(2)){
-        this.continueVect(new Point(p.x,p.y+1),img);
-        return;
-      }
-      this.del();
-    }
-    if(p.x-1 >= 0 && p.y+1 < img.hauteur &&img.tab2D[p.y+1][p.x-1]==255){
-      this.add(new Point(p.x-1,p.y+1));
-      if(this.estDiscret(2)){
-        this.continueVect(new Point(p.x-1,p.y+1),img);
-        return;
-      }
-      this.del();
-    }
-  }
-  this.continueVect=function(p,img){
-    if(p.x+1 < img.largeur && img.tab2D[p.y][p.x+1]==255){
-      this.add(new Point(p.x+1,p.y));
-      if(this.estDiscret(2)){
+      if(this.estDiscret(prec)){
         img.set(p.x+1,p.y,0);
-        this.continueVect(this.fin(),img);
+        this.continueVect(this.fin(),img,prec);
         return;
       }
       this.del();
     }
     if(p.x+1 < img.largeur && p.y+1 < img.hauteur && img.tab2D[p.y+1][p.x+1]==255){
       this.add(new Point(p.x+1,p.y+1));
-      if(this.estDiscret(2)){
+      if(this.estDiscret(prec)){
         img.set(p.x+1,p.y+1,0);
-        this.continueVect(this.fin(),img);
+        this.continueVect(this.fin(),img,prec);
         return;
       }
       this.del();
     }
     if(p.y+1 < img.hauteur && img.tab2D[p.y+1][p.x]==255){
       this.add(new Point(p.x,p.y+1));
-      if(this.estDiscret(2)){
+      if(this.estDiscret(prec)){
         img.set(p.x,p.y+1,0);
-        this.continueVect(this.fin(),img);
+        this.continueVect(this.fin(),img,prec);
         return;
       }
       this.del();
     }
     if(p.x-1 >= 0 && p.y+1 < img.hauteur &&img.tab2D[p.y+1][p.x-1]==255){
       this.add(new Point(p.x-1,p.y+1));
-      if(this.estDiscret(2)){
+      if(this.estDiscret(prec)){
         img.set(p.x-1,p.y+1,0);
-        this.continueVect(this.fin(),img);
+        this.continueVect(this.fin(),img,prec);
         return;
       }
       this.del();
@@ -120,11 +85,13 @@ var VectorD=function(){
     }
     var a=(p2.y-p1.y)/(p2.x-p1.x);
     var b=p1.y - a*p1.x;
-    var xdiff,ydiff;
+    var xdiff,ydiff,tmp;
     for(var i=1;i<this.TabPoint.length-1;i++){
       xdiff=this.get(i).x - (this.get(i).y-b)/a;
       ydiff=this.get(i).y - (a*this.get(i).x+b);
-      if(xdiff*xdiff + ydiff*ydiff > precision*precision)
+      xdiff*=xdiff;
+      ydiff*=ydiff;
+      if((xdiff*ydiff)/(xdiff + ydiff) > precision*precision)
         return false;
       }
       return true;

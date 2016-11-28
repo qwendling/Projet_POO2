@@ -51,7 +51,8 @@ window.onload = function()
 		tmpImg.seuil(SeuilImg);
 		tmpImg=tmpImg.ToNiveauGris();
 		var Vecto=new VectImg();
-		Vecto.ToVect(tmpImg);
+		var prec=document.getElementById("PrecVect").value;
+		Vecto.ToVect(tmpImg,prec);
 		var canvasVect=document.getElementById("Vect");
 		var img=document.getElementById("img");
 		var largeur = img.naturalWidth;  // On récupère la largeur
@@ -81,16 +82,10 @@ window.onload = function()
 	  m_img.sobel();
 	  var tmpImg=m_img.copie();
 	  tmpImg.seuil(SeuilImg);
-	  m_img.print("r");
 	  tmpImg.toImgData(imgData.data);
 	  //---- afficher la tailles ----
 	  console.log(imgData.width + " x " + imgData.height);
 
-	  //---- afficher les pixels ---
-	  var buffer = "";
-	  for(var n=0; n<imgData.data.length; n++)
-			buffer = buffer + imgData.data[n] + " ";
-	  console.log(buffer);
 
 
 
