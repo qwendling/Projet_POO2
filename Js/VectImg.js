@@ -1,5 +1,5 @@
 var VectImg=function(){
-  this.TabVect=new Array();
+  EnsembleVect.call(this);
   this.ToVect=function(img,prec){
     var i;
     for(i=0;i<img.hauteur;i++){
@@ -14,11 +14,5 @@ var VectImg=function(){
         }
       }
     }
-  }
-
-  this.draw=function(context){
-    var i=0;
-    for(;i<this.TabVect.length;i++)
-      this.TabVect[i].draw(context);
   }
 }

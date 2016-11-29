@@ -56,7 +56,8 @@ var VectorD=function(){
       this.del();
     }
   }
-  this.draw=function(context){
+  this.draw=function(context,color="#000000"){
+    context.strokeStyle=color;
     context.beginPath();
     context.moveTo(this.debut().x,this.debut().y);
     context.lineTo(this.fin().x,this.fin().y);
@@ -95,5 +96,20 @@ var VectorD=function(){
         return false;
       }
       return true;
+    }
+    this.estEnContactP=function(p){
+      for(var i=0;i<this.length();i++){
+        if(Math.abs(p.x-this.TabPoint[i].x) <= 1 && Math.abs(p.y-this.TabPoint[i].y) <= 1)
+          return true;
+      }
+      return false;
+    }
+    this.estEnContact=function(v2){
+      for(var i=0;i<v2.length();i++){
+        if(this.estEnContactP(v2.get(i))){
+          return true;
+        }
+      }
+      return false;
     }
   }
