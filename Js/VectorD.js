@@ -18,6 +18,11 @@ var VectorD=function(){
   this.fin=function(){
     return this.TabPoint[this.TabPoint.length - 1];
   }
+
+  this.coefDir=function(){
+    return (this.debut().y-this.end().y)/(this.debut().x-this.end().x);
+  }
+
   this.continueVect=function(p,img,prec){
     if(p.x+1 < img.largeur && img.tab2D[p.y][p.x+1]==255){
       this.add(new Point(p.x+1,p.y));

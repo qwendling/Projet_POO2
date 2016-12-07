@@ -5,6 +5,7 @@ var svg;
 window.onload = function()
 {
 	svg=document.createElementNS('http://www.w3.org/2000/svg',"svg");
+	svg.setAttribute('id',"monSVG");
 	document.body.appendChild(svg);
 	document.getElementById("SliderSeuil").value=SeuilImg;
   //-------- creation d'un élément image --------
@@ -65,6 +66,7 @@ window.onload = function()
 		canvasVect.width=largeur;
 		canvasVect.height=hauteur;
 		var context=canvasVect.getContext('2d');
+		$("#monSVG").empty();
 		svg.setAttribute('height',hauteur);
 		svg.setAttribute('width',largeur);
 		//Vecto.draw(context);
