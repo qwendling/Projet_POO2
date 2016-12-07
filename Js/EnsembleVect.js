@@ -5,6 +5,14 @@ var EnsembleVect=function(){
     for(;i<this.TabVect.length;i++)
       this.TabVect[i].draw(context,color);
   }
+
+  this.drawsvg=function(svg){
+    var i=0;
+    for(;i<this.TabVect.length;i++){
+      this.TabVect[i].drawsvg(svg);
+    }
+  }
+
   this.put=function(v){
     this.TabVect.push(v);
   }

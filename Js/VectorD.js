@@ -64,6 +64,18 @@ var VectorD=function(){
     context.stroke();
   }
 
+  this.drawsvg=function(svg){
+    var tmp=document.createElementNS('http://www.w3.org/2000/svg',"line");
+    var debut=this.debut();
+    var fin=this.fin();
+    tmp.setAttribute('x1',debut.x);
+    tmp.setAttribute('y1',debut.y);
+    tmp.setAttribute('x2',fin.x);
+    tmp.setAttribute('y2',fin.y);
+    tmp.style="stroke:rgb(255,0,0);stroke-width:1";
+    svg.appendChild(tmp);
+  }
+
   this.estDiscret=function(precision){
     var p1=this.debut();
     var p2=this.fin();

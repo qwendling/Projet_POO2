@@ -1,8 +1,11 @@
 var m_img;
 var ctxt;
 var SeuilImg=100;
+var svg;
 window.onload = function()
 {
+	svg=document.createElementNS('http://www.w3.org/2000/svg',"svg");
+	document.body.appendChild(svg);
 	document.getElementById("SliderSeuil").value=SeuilImg;
   //-------- creation d'un élément image --------
   var img = new Image();
@@ -53,8 +56,8 @@ window.onload = function()
 		var Vecto=new VectImg();
 		var prec=document.getElementById("PrecVect").value;
 		Vecto.ToVect(tmpImg,prec);
-		var testV2=new VectImgV2();
-		testV2.ToV2(Vecto);
+		//var testV2=new VectImgV2();
+		//testV2.ToV2(Vecto);
 		var canvasVect=document.getElementById("Vect");
 		var img=document.getElementById("img");
 		var largeur = img.naturalWidth;  // On récupère la largeur
@@ -62,7 +65,10 @@ window.onload = function()
 		canvasVect.width=largeur;
 		canvasVect.height=hauteur;
 		var context=canvasVect.getContext('2d');
-		testV2.draw(context);
+		svg.setAttribute('height',hauteur);
+		svg.setAttribute('width',largeur);
+		//Vecto.draw(context);
+		Vecto.drawsvg(svg);
 	});
 
 	document.getElementById("Filter").onclick=(function(){
