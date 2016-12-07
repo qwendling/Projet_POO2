@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Meny - A three dimensional and space efficient menu concept</title>
+
+		<meta name="description" content="A three dimensional and space efficient menu created with JavaScript and CSS 3.">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="viewport" content="width=800, user-scalable=no">
+
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="css/demo.css">
+        		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="../Js/Main.js"></script>
+    <script src="../Js/Couleur.js"></script>
+    <script src="../Js/MatrixAbs.js"></script>
+    <script src="../Js/Matrix.js"></script>
+    <script src="../Js/Image.js"></script>
+    <script src="../Js/Image_NvGris.js"></script>
+    <script src="../Js/Point.js"></script>
+    <script src="../Js/VectorD.js"></script>
+    <script src="../Js/EnsembleVect.js"></script>
+    <script src="../Js/VectImg.js"></script>
+    <script src="../Js/CompoConnex.js"></script>
+    <script src="../Js/VectImgV2.js"></script>
+    <script src="../Js/meny.js"></script>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+	</head>
+
+	<body>
+
+		<div class="meny">
+			<h2>More Experiments</h2>
+			<ul>
+      <div class="row">
+  		  <div class="col-md-3" id="Option">
+          <div class="row">
+            <input type="file" id="inputfile">
+          </div>
+          <div class="row">
+            <button id="commitImg">Go !</button>
+          </div>
+          <div class="row">
+            <button id="Filter">Sobel</button>
+          </div>
+          <div class="row">
+            <input id="PrecVect" type="number" value="1"/>
+          </div>
+          <div class="row">
+            <button id="InputVect">Vectorisation</button>
+          </div>
+  			  <div class="row">
+  				  <div class="col-md-4">
+  					<span class="glyphicon glyphicon-plus" id="PlusSeuil"></span>
+  				  </div>
+  				  <div class="col-md-6">
+  					<p id="ValueSeuil">Seuil : </p>
+  				  </div>
+  				  <div class="col-md-1">
+  					<span class="glyphicon glyphicon-minus" id="MinusSeuil"></span>
+  				  </div>
+  			</div>
+  				<div class="row">
+  						<input id="SliderSeuil" type="range" max="255" min="0" step="1"/>
+  				</div>
+          </div>
+          </div>
+			</ul>
+		</div>
+
+		<div class="meny-arrow"></div>
+
+              <div class="contents">
+    <div class="container-fluid title">
+          <h1>Projet POO2 Automne 2016</h1>
+    </div>
+                  <div class="container">
+  		  <div class="col-md-9">
+          <div class="row" id="main">
+          </div>
+          <div class="row">
+            <canvas id="Vect"></canvas>
+          </div>
+  		  </div>
+        </div>
+      </div>
+		<script>
+			// Create an instance of Meny
+			var meny = Meny.create({
+				menuElement: document.querySelector( '.meny' ),
+				contentsElement: document.querySelector( '.contents' ),
+				position: Meny.getQuery().p || 'left',
+				height: 200,
+				width: 260,
+				threshold: 40,
+				mouse: true,
+				touch: true
+			});
+			if( Meny.getQuery().u && Meny.getQuery().u.match( /^http/gi ) ) {
+				var contents = document.querySelector( '.contents' );
+				contents.style.padding = '0px';
+				contents.innerHTML = '<div class="cover"></div><iframe src="'+ Meny.getQuery().u +'" style="width: 100%; height: 100%; border: 0; position: absolute;"></iframe>';
+			}
+		</script>
+
+	</body>
+</html>
