@@ -47,7 +47,10 @@ window.onload = function()
 		ctxt.putImageData(imgData,0,0);
 	});
 	document.getElementById("commitImg").onclick=(function(){
-		document.getElementById("img").src=document.getElementById("inputfile").value;
+        if( ($("#inputfile").val()).length ==0 )
+        	alert("pas de fichier sélectionné");
+		else
+			document.getElementById("img").src=document.getElementById("inputfile").value;
 	});
 
 	document.getElementById("InputVect").onclick=(function(){
