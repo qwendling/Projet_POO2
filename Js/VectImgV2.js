@@ -1,6 +1,7 @@
 var VectImgV2=function(){
   this.TabConnex=new Array();
   this.TabColor=["#FF0000","#00FF00","#0000FF","#FFFF00","#FF00FF","#00FFFF","#000000"];
+  this.TabBezier=new Array();
   this.get=function(i){
     return this.TabConnex[i];
   }
@@ -15,6 +16,14 @@ var VectImgV2=function(){
       var newComp=new CompoConnex();
       newComp.takeVect(imgVect);
       this.add(newComp);
+    }
+    while(this.TabConnex.length > 0){
+      while(this.TabConnex[0].length() > 0){
+        var newBezier=new BezierSetup();
+        newBezier.takeVect(this.TabConnex[0]);
+        this.TabBezier.push(newBezier);
+      }
+      this.TabConnex.shift();
     }
   }
   this.draw=function(context){

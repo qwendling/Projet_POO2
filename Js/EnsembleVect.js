@@ -13,6 +13,11 @@ var EnsembleVect=function(){
     }
   }
 
+
+    this.unshift=function(v){
+      this.TabVect.unshift(v);
+    }
+
   this.put=function(v){
     this.TabVect.push(v);
   }
