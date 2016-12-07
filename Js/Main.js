@@ -53,6 +53,8 @@ window.onload = function()
 		var Vecto=new VectImg();
 		var prec=document.getElementById("PrecVect").value;
 		Vecto.ToVect(tmpImg,prec);
+		var testV2=new VectImgV2();
+		testV2.ToV2(Vecto);
 		var canvasVect=document.getElementById("Vect");
 		var img=document.getElementById("img");
 		var largeur = img.naturalWidth;  // On récupère la largeur
@@ -60,7 +62,7 @@ window.onload = function()
 		canvasVect.width=largeur;
 		canvasVect.height=hauteur;
 		var context=canvasVect.getContext('2d');
-		Vecto.draw(context);
+		testV2.draw(context);
 	});
 
 	document.getElementById("Filter").onclick=(function(){
