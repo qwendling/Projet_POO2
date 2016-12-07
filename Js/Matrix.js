@@ -12,6 +12,13 @@ var Matrix=function(largeur,hauteur){
     return newM;
   }
 
+  this.multTab = function(coeff){
+    var i; var j;
+    for(i=0;i<this.hauteur;i++)
+        for(j=0;j<this.largeur;j++)
+            this.set(j,i, this.get(j,i) * coeff);
+  }
+
   this.add=function(MatrixB){
     if(MatrixB.largeur != this.largeur || MatrixB.hauteur != this.hauteur){
       console.log("Argument invalide pour l'addition de matrice");

@@ -1,4 +1,4 @@
-var Matrix=function(largeur,hauteur){
+var MatrixAbs=function(largeur,hauteur){
   this.hauteur=hauteur;
   this.largeur=largeur;
   this.tab2D=new Array(hauteur);
