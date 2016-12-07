@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Meny - A three dimensional and space efficient menu concept</title>
+		<title>Projet POO</title>
 
 		<meta name="description" content="A three dimensional and space efficient menu created with JavaScript and CSS 3.">
 		<meta name="author" content="Hakim El Hattab">
@@ -40,8 +40,8 @@
 
 	<body>
 
-		<div class="meny">
-			<h2>More Experiments</h2>
+		<div class="meny sideMenu">
+			<h2 class="title">Menu</h2>
 			<ul>
       <div class="row">
   		  <div class="col-md-3" id="Option">
@@ -49,31 +49,32 @@
             <input type="file" id="inputfile">
           </div>
           <div class="row">
-            <button id="commitImg">Go !</button>
+            <button class="btn default btnWithSpace" id="commitImg">Go !</button>
           </div>
           <div class="row">
-            <button id="Filter">Sobel</button>
+            <button class="btn default btnWithSpace" id="Filter">Sobel</button>
           </div>
           <div class="row">
             <input id="PrecVect" type="number" value="1"/>
           </div>
           <div class="row">
-            <button id="InputVect">Vectorisation</button>
+            <button class="btn default btnWithSpace" id="InputVect">Vectorisation</button>
           </div>
-  			  <div class="row">
-  				  <div class="col-md-4">
+  			  <div class="row centeredWhite">
+                  <p id="ValueSeuil">Seuil : </p>
+                  </div>
+              <div class= "row">
+                  <div class="col-sm-6">
+                  <span class="glyphicon glyphicon-minus" id="MinusSeuil"></span>
+                      </div>
+                  <div class="col-sm-6">
   					<span class="glyphicon glyphicon-plus" id="PlusSeuil"></span>
-  				  </div>
-  				  <div class="col-md-6">
-  					<p id="ValueSeuil">Seuil : </p>
-  				  </div>
-  				  <div class="col-md-1">
-  					<span class="glyphicon glyphicon-minus" id="MinusSeuil"></span>
-  				  </div>
-  			</div>
-  				<div class="row">
-  						<input id="SliderSeuil" type="range" max="255" min="0" step="1"/>
-  				</div>
+                  </div>
+                    </div>
+  				<div class="row ">
+  		        <input id="SliderSeuil" type="range" max="255" min="0" step="1"/>
+              </div>
+  				
           </div>
           </div>
 			</ul>
@@ -86,13 +87,16 @@
           <h1>Projet POO2 Automne 2016</h1>
     </div>
                   <div class="container">
-  		  <div class="col-md-9">
+  		  <div class="col-md-12">
           <div class="row" id="main">
           </div>
-          <div class="row">
+              
+        <div class="row"> </div> <!-- si possible mettre le svg là dedans -->
+  		  </div>
+              
+          <div class="row" id="imgVect">
             <canvas id="Vect"></canvas>
           </div>
-  		  </div>
         </div>
       </div>
 		<script>

@@ -21,3 +21,29 @@ input[type="range"]::after {
     color: aliceblue;
     text-align: center;
 }
+#imgVect{
+    text-align: center;
+}
+.btnWithSpace{
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.sideMenu{
+    background-color: #bfbfbf;
+    
+}
+.centeredWhite{
+    text-align: center;
+    background-color: white;
+}
+#SliderSeuil{
+    
+}
+svg{
+    margin-left: 40%;
+    margin-right: 40%;
+}
+#Vect{
+    position: relative;
+    z-index: -1;
+}
