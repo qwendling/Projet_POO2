@@ -101,12 +101,16 @@ var Matrix=function(largeur,hauteur){
 
   this.Bezier=function(){
     var A1,A2,B1,B2;
+    //Création des matrice
     A1=new Matrix(4,this.hauteur);
     A2=new Matrix(4,this.hauteur);
     B1=new Matrix(1,this.hauteur);
     B2=new Matrix(1,this.hauteur);
     var i,tmp,tmp2;
+
+    //Phase d'initialisation des matrices
     for(i=0;i<this.hauteur;i++){
+      //Initialisation des matrices A1 les info sur x B1 sur y
       tmp=this.get(0,i);
       B1.set(0,i,tmp);
       A1.set(0,i,tmp);
@@ -114,8 +118,8 @@ var Matrix=function(largeur,hauteur){
       A1.set(1,i,tmp2);
       tmp2*=tmp;
       A1.set(2,i,tmp2);
-      tmp2*=tmp;
-      A1.set(3,i,tmp2);
+      A1.set(3,i,1);
+      //Meme chose avec A2 et B2 mais on inverse x et y
       tmp=this.get(1,i);
       B2.set(0,i,tmp);
       A2.set(0,i,tmp);
@@ -123,9 +127,37 @@ var Matrix=function(largeur,hauteur){
       A2.set(1,i,tmp2);
       tmp2*=tmp;
       A2.set(2,i,tmp2);
-      tmp2*=tmp;
-      A2.set(3,i,tmp2);
+      A2.set(3,i,1);
     }
-    return;
+
+    //Moindre carre sur les x
+    var A1t=A1.transpose();
+    var RX=A1t.mult(A1).gauss(A1t.mult(B1));
+    //Moindre carre sur les y
+    var A2t=A2.transpose();
+    var RY=A2t.mult(A2).gauss(A2t.mult(B2));
+
+    var p0x=RX.get(0,3);
+    RX.set(0,0,(3*p0x+RX.get(0,0))/3);
+    var p1x=RX.get(0,0);
+    RX.set(0,1,(RX.get(0,1)-3*p0x+6*p1x)/3);
+    var p2x=RX.get(0,1);
+    RX.set(0,2,RX.get(0,2)+p0x-3*p1x+3*p2x);
+
+    var p0y=RY.get(0,3);
+    RY.set(0,0,(3*p0y+RY.get(0,0))/3);
+    var p1y=RY.get(0,0);
+    RY.set(0,1,(RY.get(0,1)-3*p0y+6*p1y)/3);
+    var p2y=RY.get(0,1);
+    RY.set(0,2,RY.get(0,2)+p0y-3*p1y+3*p2y);
+
+    var p0=new Point(p0x,p0y);
+    var p1=new Point(p1x,p1y);
+    var p2=new Point(p2x,p2y);
+    var p3=new Point(p3x,p3y);
+
+    var result=[p0,p1,p2,p3];
+
+    return result;
   }
 }
