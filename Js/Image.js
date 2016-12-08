@@ -227,105 +227,148 @@ var MonImage=function(largeur,hauteur){
 	}
 
 	this.deriche=function(alpha){
-    var i; var j;
-    var k=  (Math.pow( 1- Math.exp( -alpha ),2 )) /
-        (1 + 2 / alpha * Math.exp(-alpha) - Math.exp( -2 * alpha));
-    var a1 =0;
-    var a2 = 1;
-    var a3 = -1;
-    var a4 = 0;
-    var a5 = k;
-    var a6 = k * Math.exp( - alpha ) * (alpha -1);
-    var a7 = k * Math.exp( - alpha) * (alpha + 1);
-    var a8 = -k * Math.exp(-2 * alpha);
-    var b1= 2 * Math.exp(-alpha);
-    var b2= -Math.exp(-2 * alpha);
-    var c1 = -1 * Math.pow( 1-Math.exp(-alpha) ,2);
-    var copie = this.ToNiveauGris();
-    var y1= new Image_NvGris(this.largeur, this.hauteur);
-    var y2=new Image_NvGris(this.largeur, this.hauteur);
-    var tabTmp = new Image_NvGris(this.largeur, this.hauteur);
-    var tabTmp2 = new Image_NvGris(this.largeur, this.hauteur);
-    var valeur;
+	var i; var j;
+	var k=  (Math.pow( 1- Math.exp( -alpha ),2 )) /
+			(1 + 2 / alpha * Math.exp(-alpha) - Math.exp( -2 * alpha));
+	var a1 =0;
+	var a2 = 1;
+	var a3 = -1;
+	var a4 = 0;
+	var a5 = k;
+	var a6 = k * Math.exp( - alpha ) * (alpha -1);
+	var a7 = k * Math.exp( - alpha) * (alpha + 1);
+	var a8 = -k * Math.exp(-2 * alpha);
+	var b1= 2 * Math.exp(-alpha);
+	var b2= -Math.exp(-2 * alpha);
+	var c1 = -1 * Math.pow( 1-Math.exp(-alpha) ,2);
+	var copie = this.ToNiveauGris();
+	var y1= new Image_NvGris(this.largeur, this.hauteur);
+	var y2=new Image_NvGris(this.largeur, this.hauteur);
+	var tabTmp = new Image_NvGris(this.largeur, this.hauteur);
+	var tabTmp2 = new Image_NvGris(this.largeur, this.hauteur);
+	var valeur;
 
-    /*x'*/
-    /* première étape */
-    for(i=0;i<this.hauteur;i++)
-        for(j=0;j<this.largeur;j++){
-             valeur= copie.calcY1(y1,i,j,b1,b2,a1,a2);
-             y1.set(j,i,valeur);
-          }
-    for(i=this.hauteur-1;i>=0;i--)
-        for(j=this.largeur-1;j>=0;j--){
-          valeur = copie.calcY2(y2,i,j,b1,b2,a3,a4);
-            y2.set(j,i, valeur);
-          }
-                console.log(y1);
-    //tabTmp.tab2D = (( y1.add(y2)).multTab(c1)).tab2D;
-		y1.add(y2);
-		y1.multTab(c1);
-		tabTmp= y1.copie();
-    /* deuxième étape */
+			/* smoothing */
 
-    for(i=0;i<this.hauteur;i++)
-        for(j=0;j<this.largeur;j++){
-          valeur = copie.calc2Y1(y1,i,j,b1,b2,a5,a6,tabTmp);
-            y1.set(j,i,valeur);
-          }
-    for(i=this.hauteur-1;i>=0;i--)
-        for(j=this.largeur-1;j>=0;j--){
-          valeur = copie.calc2Y2(y2,i,j,b1,b2,a7,a8,tabTmp);
-            y2.set(j,i,valeur);
-          }
-    y1.add(y2);
-    tabTmp = y1.copie();
+					//première étape
+	for(i=0;i<this.hauteur;i++)
+			for(j=0;j<this.largeur;j++){
+					 valeur= copie.calcY1(y1,i,j,b1,b2,a5,a6);
+					 y1.set(j,i,valeur);
+				}
+	for(i=this.hauteur-1;i>=0;i--)
+			for(j=this.largeur-1;j>=0;j--){
+				valeur = copie.calcY2(y2,i,j,b1,b2,a7,a8);
+					y2.set(j,i, valeur);
+				}
+	//tabTmp.tab2D = (( y1.add(y2)).multTab(c1)).tab2D;
+	tabTmp= y1.copie();
+	tabTmp.add(y2);
+	// deuxième étape
 
-    /*y' */
-            /* première étape */
-
-    for(i=0;i<this.hauteur;i++)
-        for(j=0;j<this.largeur;j++){
-          valeur = copie.calcY1(y1,i,j,b1,b2,a5,a6);
-            y1.set(j,i,valeur);
-          }
-    for(i=this.hauteur-1;i>=0;i--)
-        for(j=this.largeur-1;j>=0;j--){
-          valeur = copie.calcY2(y2,i,j,b1,b2,a7,a8);
-            y2.set(j,i,valeur);
-          }
-    y1.add(y2);
-    tabTmp2 = y1.copie();
-    /* deuxième étape */
-
-    for(i=0;i<this.hauteur;i++)
-        for(j=0;j<this.largeur;j++){
-          valeur = copie.calc2Y1(y1,i,j,b1,b2,a1,a2,tabTmp2);
-            y1.set(j,i,valeur);
-            //console.log(y1.get(j,i));
-          }
-    for(i=this.hauteur-1;i>=0;i--)
-        for(j=this.largeur-1;j>=0;j--){
-            valeur = copie.calc2Y2(y2,i,j,b1,b2,a3,a4,tabTmp2);
-            y2.set(j,i,valeur);
-
-          }
-    y1.add(y2);
-    y1.multTab(c1);
-    tabTmp2 = y1.copie();
-    tabTmp.mult(tabTmp);
-    tabTmp2.mult(tabTmp2);
-    tabTmp.add(tabTmp2);
-    tabTmp.sqrtall();
+	for(i=0;i<this.hauteur;i++)
+			for(j=0;j<this.largeur;j++){
+				valeur = copie.calc2Y1(y1,i,j,b1,b2,a5,a6,tabTmp);
+					y1.set(j,i,valeur);
+				}
+	for(i=this.hauteur-1;i>=0;i--)
+			for(j=this.largeur-1;j>=0;j--){
+				valeur = copie.calc2Y2(y2,i,j,b1,b2,a7,a8,tabTmp);
+					y2.set(j,i,valeur);
+				}
+	copie = y1.copie();
+	copie.add(y2);
 
 
-    for(j=0;j<this.hauteur;j++){
-      for(k=0;k<this.largeur;k++){
-        if(tabTmp.get(k,j)>255.)
-          this.set(k,j,new Couleur(255,255,255,255));
-        else
-          this.set(k,j,new Couleur(tabTmp.get(k,j),tabTmp.get(k,j),tabTmp.get(k,j)));
-      }
-    }
+	/*x'*/
+	/* première étape */
+	for(i=0;i<this.hauteur;i++)
+			for(j=0;j<this.largeur;j++){
+					 valeur= copie.calcY1(y1,i,j,b1,b2,a1,a2);
+					 y1.set(j,i,valeur);
+				}
+	for(i=this.hauteur-1;i>=0;i--)
+			for(j=this.largeur-1;j>=0;j--){
+				valeur = copie.calcY2(y2,i,j,b1,b2,a3,a4);
+					y2.set(j,i, valeur);
+				}
+	//tabTmp.tab2D = (( y1.add(y2)).multTab(c1)).tab2D;
+	tabTmp= y1.copie();
+			tabTmp.add(y2);
+	tabTmp.multTab(c1);
+	/* deuxième étape */
+
+	for(i=0;i<this.hauteur;i++)
+			for(j=0;j<this.largeur;j++){
+				valeur = copie.calc2Y1(y1,i,j,b1,b2,a5,a6,tabTmp);
+					y1.set(j,i,valeur);
+				}
+	for(i=this.hauteur-1;i>=0;i--)
+			for(j=this.largeur-1;j>=0;j--){
+				valeur = copie.calc2Y2(y2,i,j,b1,b2,a7,a8,tabTmp);
+					y2.set(j,i,valeur);
+				}
+	tabTmp = y1.copie();
+	tabTmp.add(y2);
+
+	/*y' */
+					/* première étape */
+
+	for(i=0;i<this.hauteur;i++)
+			for(j=0;j<this.largeur;j++){
+				valeur = copie.calcY1(y1,i,j,b1,b2,a5,a6);
+					y1.set(j,i,valeur);
+				}
+	for(i=this.hauteur-1;i>=0;i--)
+			for(j=this.largeur-1;j>=0;j--){
+				valeur = copie.calcY2(y2,i,j,b1,b2,a7,a8);
+					y2.set(j,i,valeur);
+				}
+	tabTmp2 = y1.copie();
+	tabTmp2.add(y2);
+	// deuxième étape
+	for(i=0;i<this.hauteur;i++)
+			for(j=0;j<this.largeur;j++){
+				valeur = copie.calc2Y1(y1,i,j,b1,b2,a1,a2,tabTmp2);
+					y1.set(j,i,valeur);
+					//console.log(y1.get(j,i));
+				}
+	for(i=this.hauteur-1;i>=0;i--)
+			for(j=this.largeur-1;j>=0;j--){
+					valeur = copie.calc2Y2(y2,i,j,b1,b2,a3,a4,tabTmp2);
+					y2.set(j,i,valeur);
+
+				}
+
+		 // console.log(y2);
+			//console.log(y1);
+			//console.log(c1);
+	y1.add(y2);
+			//console.log(y1);
+			//console.log(y1);
+	y1.multTab(c1);
+			console.log("achtung");
+			console.log(tabTmp);
+			console.log(y1);
+	//tabTmp2 = y1.copie();
+
+			//console.log(tabTmp2);
+			//console.log(tabTmp2);
+
+	tabTmp.mult(tabTmp);
+	y1.mult(y1);
+	tabTmp.add(y1);
+	tabTmp.sqrtall();
+
+
+	for(j=0;j<this.hauteur;j++){
+		for(k=0;k<this.largeur;k++){
+			if(tabTmp.get(k,j)>255.)
+				this.set(k,j,new Couleur(255,255,255,255));
+			else
+				this.set(k,j,new Couleur(tabTmp.get(k,j),tabTmp.get(k,j),tabTmp.get(k,j)));
+		}
 	}
+}
 
 }
