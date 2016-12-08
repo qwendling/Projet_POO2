@@ -17,7 +17,7 @@ input[type="range"]::after {
     content: attr(max);
 }
 .title{
-    background-color: darkslategray;
+    background-color: #105d9f;
     color: aliceblue;
     text-align: center;
 }
@@ -46,4 +46,7 @@ svg{
 #Vect{
     position: relative;
     z-index: -1;
+}
+img{
+    margin-top: 10px;
 }

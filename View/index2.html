@@ -22,7 +22,8 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="../Js/Main.js"></script>
+            <script src="../Js/UI.js"></script>
+        <script src="../Js/Main.js"></script>
     <script src="../Js/Couleur.js"></script>
     <script src="../Js/MatrixAbs.js"></script>
     <script src="../Js/Matrix.js"></script>
@@ -35,6 +36,7 @@
     <script src="../Js/CompoConnex.js"></script>
     <script src="../Js/VectImgV2.js"></script>
     <script src="../Js/meny.js"></script>
+
     <link rel="stylesheet" type="text/css" href="./style.css">
 	</head>
 
@@ -49,18 +51,18 @@
             <input type="file" id="inputfile">
           </div>
           <div class="row">
-            <button class="btn default btnWithSpace" id="commitImg">Go !</button>
+            <button class="btn btn-primary btnWithSpace" id="commitImg">Go !</button>
           </div>
           <div class="row">
-            <button class="btn default btnWithSpace" id="Filter">Sobel</button>
+            <button class="btn btn-primary btnWithSpace" id="Filter">Sobel</button>
           </div>
           <div class="row">
             <input id="PrecVect" type="number" value="1"/>
           </div>
           <div class="row">
-            <button class="btn default btnWithSpace" id="InputVect">Vectorisation</button>
+            <button class="btn btn-primary btnWithSpace" id="InputVect">Vectorisation</button>
           </div>
-  			  <div class="row centeredWhite">
+  			  <div class="row ">
                   <p id="ValueSeuil">Seuil : </p>
                   </div>
               <div class= "row">
@@ -89,8 +91,7 @@
                   <div class="container">
   		  <div class="col-md-12">
           <div class="row" id="main">
-          </div>
-              
+          </div>    
         <div class="row" id="ImageVecto"> </div> <!-- si possible mettre le svg là dedans -->
   		  </div>
         </div>

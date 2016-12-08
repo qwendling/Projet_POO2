@@ -2,6 +2,7 @@ var m_img;
 var ctxt;
 var SeuilImg=100;
 var svg;
+
 window.onload = function()
 {
 	svg=document.createElementNS('http://www.w3.org/2000/svg',"svg");
@@ -46,11 +47,14 @@ window.onload = function()
 		tmpImg.toImgData(imgData.data);
 		ctxt.putImageData(imgData,0,0);
 	});
+    var ui = new UI();
 	document.getElementById("commitImg").onclick=(function(){
         if( ($("#inputfile").val()).length ==0 )
         	alert("pas de fichier sélectionné");
-		else
+		else{
 			document.getElementById("img").src=document.getElementById("inputfile").value;
+            ui.afterGo();
+        }
 	});
 
 	document.getElementById("InputVect").onclick=(function(){
@@ -109,6 +113,7 @@ window.onload = function()
 	  // visualiser imgData modifié
 
 	  ctxt.putImageData(imgData,0,0);
+        ui.afterFiltre();
 	});
 
 }
