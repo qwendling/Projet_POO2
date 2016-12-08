@@ -2,13 +2,16 @@ var Bezier=function(){
   this.TabPoint;
 
   this.fromSetup=function(S){
-    var Mcoord=new Matrix(2,S.length+1);
+    var Mcoord=new Matrix(2,S.length()+1);
     Mcoord.set(0,0,S.debut().x);
-    Mcoord.set(0,1,S.debut().y);
-    for(var i=0;i<S.length;i++){
-      Mcoord.set(i,0,S.get(i).end().x);
-      Mcoord.set(i,1,S.get(i).end().y);
+    Mcoord.set(1,0,S.debut().y);
+    console.log("___");
+    for(var i=0;i<S.length();i++){
+      Mcoord.set(0,i,S.get(i).fin().x);
+      Mcoord.set(1,i,S.get(i).fin().y);
+      console.log(S.get(i).fin().y);
     }
+    console.log("___");
     this.TabPoint=Mcoord.Bezier();
   }
 

@@ -26,13 +26,14 @@ var VectImgV2=function(){
       }
       this.TabConnex.shift();
     }
+    console.log("Partie bezier");
     for(var i=0;i<this.TabBezier.length;i++){
       if(this.TabBezier[i].length() > 5){
         var nB=new Bezier();
         nB.fromSetup(this.TabBezier[i]);
-        TabElem.push(nB);
+        this.TabElem.push(nB);
       }else{
-        TabElem.push(this.TabBezier[i])
+        this.TabElem.push(this.TabBezier[i])
       }
     }
   }

@@ -20,7 +20,7 @@ var VectorD=function(){
   }
 
   this.coefDir=function(){
-    return (this.debut().y-this.end().y)/(this.debut().x-this.end().x);
+    return (this.debut().y-this.fin().y)/(this.debut().x-this.fin().x);
   }
 
   this.continueVect=function(p,img,prec){

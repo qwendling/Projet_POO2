@@ -64,8 +64,8 @@ window.onload = function()
 		var Vecto=new VectImg();
 		var prec=document.getElementById("PrecVect").value;
 		Vecto.ToVect(tmpImg,prec);
-		//var testV2=new VectImgV2();
-		//testV2.ToV2(Vecto);
+		var testV2=new VectImgV2();
+		testV2.ToV2(Vecto);
 		var canvasVect=document.getElementById("Vect");
 		var img=document.getElementById("img");
 		var largeur = img.naturalWidth;  // On récupère la largeur
@@ -76,8 +76,8 @@ window.onload = function()
 		$("#monSVG").empty();
 		svg.setAttribute('height',hauteur);
 		svg.setAttribute('width',largeur);
-		//Vecto.draw(context);
-		Vecto.drawsvg(svg);
+		//Vecto.drawsvg(svg);
+		testV2.drawsvg(svg);
 	});
 
 	document.getElementById("Filter").onclick=(function(){
