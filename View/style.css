@@ -20,6 +20,8 @@ input[type="range"]::after {
     background-color: #105d9f;
     color: aliceblue;
     text-align: center;
+    height: 100px;
+    overflow: hidden;
 }
 #imgVect{
     text-align: center;
@@ -30,14 +32,14 @@ input[type="range"]::after {
 }
 .sideMenu{
     background-color: #bfbfbf;
-    
+    min-height: 1080px;
 }
 .centeredWhite{
     text-align: center;
     background-color: white;
 }
 #SliderSeuil{
-    
+
 }
 svg{
     margin-left: 40%;
@@ -52,4 +54,14 @@ img{
 }
 canvas{
     margin-top: 10px;
+}
+.choixFichier{
+  overflow: hidden;
+  max-width: 260px;
+}
+#ValueSeuil{
+  text-align: center;
+}
+.container{
+  min-height: 1080px;
 }
