@@ -7,7 +7,7 @@ window.onload = function()
 {
 	svg=document.createElementNS('http://www.w3.org/2000/svg',"svg");
 	svg.setAttribute('id',"monSVG");
-	document.body.appendChild(svg);
+	document.getElementById("ImageVecto").appendChild(svg);
 	document.getElementById("SliderSeuil").value=SeuilImg;
   //-------- creation d'un élément image --------
   var img = new Image();
@@ -64,20 +64,20 @@ window.onload = function()
 		var Vecto=new VectImg();
 		var prec=document.getElementById("PrecVect").value;
 		Vecto.ToVect(tmpImg,prec);
-		var testV2=new VectImgV2();
-		testV2.ToV2(Vecto);
-		var canvasVect=document.getElementById("Vect");
+		//var testV2=new VectImgV2();
+		//testV2.ToV2(Vecto);
+		//var canvasVect=document.getElementById("Vect");
 		var img=document.getElementById("img");
 		var largeur = img.naturalWidth;  // On récupère la largeur
 	  var hauteur = img.naturalHeight; // et la hauteur de l'image
-		canvasVect.width=largeur;
-		canvasVect.height=hauteur;
-		var context=canvasVect.getContext('2d');
+		// canvasVect.width=largeur;
+		// canvasVect.height=hauteur;
+		//var context=canvasVect.getContext('2d');
 		$("#monSVG").empty();
 		svg.setAttribute('height',hauteur);
 		svg.setAttribute('width',largeur);
-		//Vecto.drawsvg(svg);
-		testV2.drawsvg(svg);
+		Vecto.drawsvg(svg);
+		//testV2.drawsvg(svg);
 	});
 
 	document.getElementById("Filter").onclick=(function(){
@@ -115,7 +115,7 @@ window.onload = function()
 	  ctxt.putImageData(imgData,0,0);
         ui.afterFiltre();
 	});
-                                               
+
 	document.getElementById("Deriche").onclick=(function(){
 		var img=document.getElementById("img");
 		var canv=document.getElementById("canvS");
@@ -151,7 +151,7 @@ window.onload = function()
 	  ctxt.putImageData(imgData,0,0);
         ui.afterFiltre();
 	}
-    
+
  );
 
 }
