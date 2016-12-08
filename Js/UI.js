@@ -1,5 +1,5 @@
 var UI = function(){
-    
+
     this.btnSobel = document.getElementById("Filter");
     this.btnDeriche = document.getElementById("Deriche");
     this.valVecto = document.getElementById("PrecVect");
@@ -8,6 +8,8 @@ var UI = function(){
     this.minusSeuil = document.getElementById("MinusSeuil");
     this.plusSeuil = document.getElementById("PlusSeuil");
     this.sliderSeuil = document.getElementById("SliderSeuil");
+    this.btnPrewitt = document.getElementById("Prewitt");
+    this.btnDrop = document.getElementById("dropdownMenu1");
     this.btnSobel.style.visibility = "hidden";
     this.btnDeriche.style.visibility = "hidden";
     this.valVecto.style.visibility = "hidden";
@@ -16,8 +18,11 @@ var UI = function(){
     this.minusSeuil.style.visibility = "hidden";
     this.plusSeuil.style.visibility = "hidden";
     this.sliderSeuil.style.visibility = "hidden";
-    
+    this.btnPrewitt.style.visibility= "hidden";
+    this.btnDrop.style.visibility= "hidden";
     this.afterGo= function(){
+        this.btnPrewitt.style.visibility= "visible";
+        this.btnDrop.style.visibility= "visible";
         this.btnSobel.style.visibility = "visible";
         this.btnDeriche.style.visibility = "visible";
         this.minusSeuil.style.visibility = "visible";
@@ -25,7 +30,7 @@ var UI = function(){
         this.sliderSeuil.style.visibility = "visible";
         this.valSeuil.style.visibility = "visible";
     }
-    
+
     this.afterFiltre= function(){
         this.valVecto.style.visibility = "visible";
         this.btnVect.style.visibility = "visible";

@@ -58,9 +58,19 @@
             <button class="btn btn-primary btnWithSpace" id="commitImg">Go !</button>
           </div>
           <div class="row">
-              <div class="btn-group" role="group" aria-label="...">
-            <button class="btn btn-primary btnWithSpace" id="Filter">Sobel</button>
-                <button class="btn btn-primary btnWithSpace" id="Deriche">Deriche</button>
+              <div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Filtres
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><button class="btn btn-primary btnWithSpace" id="Filter">Sobel</button></li>
+    <li>  <button class="btn btn-primary btnWithSpace" id="Deriche">Deriche</button></li>
+    <li>	<button class="btn btn-primary btnWithSpace" id="Prewitt">Prewitt</button></li>
+  </ul>
+
+
+
           </div>
   			  <div class="row ">
                   <p id="ValueSeuil">Seuil : </p>

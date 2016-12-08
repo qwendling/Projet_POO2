@@ -226,6 +226,27 @@ var MonImage=function(largeur,hauteur){
 		}
 	}
 
+	this.prewitt=function(){
+		var noyau1=tab3x3(-1,0,1,-1,0,1,-1,0,1);
+		var noyau2=tab3x3(-1,-1,-1,0,0,0,1,1,1);
+		var gx=this.ToNiveauGris();
+		var gy=this.ToNiveauGris();
+		gx.convolution(noyau1);
+		gy.convolution(noyau2);
+		gx.mult(gx);
+		gy.mult(gy);
+		gx.add(gy);
+		gx.sqrtall();
+		for(j=0;j<this.hauteur;j++){
+			for(k=0;k<this.largeur;k++){
+				if(gx.tab2D[j][k]>255.)
+					this.set(k,j,new Couleur(255,255,255,255));
+				else
+					this.set(k,j,new Couleur(gx.get(k,j),gx.get(k,j),gx.get(k,j)));
+			}
+		}
+	}
+
 	this.deriche=function(alpha){
 	var i; var j;
 	var k=  (Math.pow( 1- Math.exp( -alpha ),2 )) /

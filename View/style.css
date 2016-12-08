@@ -31,8 +31,9 @@ input[type="range"]::after {
     margin-bottom: 2px;
 }
 .sideMenu{
-    background-color: #bfbfbf;
+    background-color: ##FEFEFE;
     min-height: 1080px;
+    min-width: : 300px;
 }
 .centeredWhite{
     text-align: center;
