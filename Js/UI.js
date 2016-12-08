@@ -1,6 +1,7 @@
 var UI = function(){
     
     this.btnSobel = document.getElementById("Filter");
+    this.btnDeriche = document.getElementById("Deriche");
     this.valVecto = document.getElementById("PrecVect");
     this.btnVect = document.getElementById("InputVect");
     this.valSeuil = document.getElementById("ValueSeuil");
@@ -8,6 +9,7 @@ var UI = function(){
     this.plusSeuil = document.getElementById("PlusSeuil");
     this.sliderSeuil = document.getElementById("SliderSeuil");
     this.btnSobel.style.visibility = "hidden";
+    this.btnDeriche.style.visibility = "hidden";
     this.valVecto.style.visibility = "hidden";
     this.btnVect.style.visibility = "hidden";
     this.valSeuil.style.visibility = "hidden";
@@ -17,6 +19,7 @@ var UI = function(){
     
     this.afterGo= function(){
         this.btnSobel.style.visibility = "visible";
+        this.btnDeriche.style.visibility = "visible";
         this.minusSeuil.style.visibility = "visible";
         this.plusSeuil.style.visibility = "visible";
         this.sliderSeuil.style.visibility = "visible";

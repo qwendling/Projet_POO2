@@ -51,6 +51,12 @@ var Image_NvGris=function(largeur,hauteur){
 			}
 		}
 	}
+this.multTab = function(coeff){
+    var i; var j;
+    for(i=0;i<this.hauteur;i++)
+        for(j=0;j<this.largeur;j++)
+            this.set(j,i, this.get(j,i) * coeff);
+}
   this.sqrtall=function(){
 		var j,k;
 		for(j=0;j<this.hauteur;j++){

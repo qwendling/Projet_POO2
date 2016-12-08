@@ -115,5 +115,43 @@ window.onload = function()
 	  ctxt.putImageData(imgData,0,0);
         ui.afterFiltre();
 	});
+                                               
+	document.getElementById("Deriche").onclick=(function(){
+		var img=document.getElementById("img");
+		var canv=document.getElementById("canvS");
+		var largeur = img.naturalWidth;  // On récupère la largeur
+	  var hauteur = img.naturalHeight; // et la hauteur de l'image
+		canv.width = largeur;
+	  canv.height = hauteur;
+		ctxt = canv.getContext('2d');
+	  //------- chargement de l'image de départ dans le canvas -----
+	  ctxt.drawImage(img, 0, 0);
+	  var imgData = ctxt.getImageData(0,0,largeur,hauteur);
+	  //--------------------------------------------------
+	  //------------- Traitement de imgData --------------
+	  //--------------------------------------------------
+	  m_img=new MonImage(largeur,hauteur);
+	  m_img.fromImageData(imgData.data);
+	  m_img.deriche(1);
+	  var tmpImg=m_img.copie();
+	  tmpImg.seuil(SeuilImg);
+	  tmpImg.toImgData(imgData.data);
+	  //---- afficher la tailles ----
+	  console.log(imgData.width + " x " + imgData.height);
+
+
+
+
+	  //--------------------------------------------------
+	  //------------- Fin des Traitements ----------------
+	  //--------------------------------------------------
+
+	  // visualiser imgData modifié
+
+	  ctxt.putImageData(imgData,0,0);
+        ui.afterFiltre();
+	}
+    
+ );
 
 }

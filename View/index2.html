@@ -46,7 +46,7 @@
 			<h2 class="title">Menu</h2>
 			<ul>
       <div class="row">
-  		  <div class="col-md-3" id="Option">
+  		  <div class="col-md-8" id="Option">
           <div class="row">
             <input type="file" id="inputfile">
           </div>
@@ -54,13 +54,9 @@
             <button class="btn btn-primary btnWithSpace" id="commitImg">Go !</button>
           </div>
           <div class="row">
+              <div class="btn-group" role="group" aria-label="...">
             <button class="btn btn-primary btnWithSpace" id="Filter">Sobel</button>
-          </div>
-          <div class="row">
-            <input id="PrecVect" type="number" value="1"/>
-          </div>
-          <div class="row">
-            <button class="btn btn-primary btnWithSpace" id="InputVect">Vectorisation</button>
+                <button class="btn btn-primary btnWithSpace" id="Deriche">Deriche</button>
           </div>
   			  <div class="row ">
                   <p id="ValueSeuil">Seuil : </p>
@@ -76,6 +72,12 @@
   				<div class="row ">
   		        <input id="SliderSeuil" type="range" max="255" min="0" step="1"/>
               </div>
+                        <div class="row">
+            <input id="PrecVect" type="number" value="1"/>
+          </div>
+          <div class="row">
+            <button class="btn btn-primary btnWithSpace" id="InputVect">Vectorisation</button>
+          </div>
   				
           </div>
           </div>
